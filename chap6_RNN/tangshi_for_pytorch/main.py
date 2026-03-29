@@ -187,7 +187,7 @@ def pretty_print_poem(poem):  # 令打印的结果更工整
         shige.append(w)
     poem_sentences = poem.split('。')
     for s in poem_sentences:
-        if s != '' and len(s) > 10:
+        if s != '' and len(s) > 2:
             print(s + '。')
 
 
@@ -198,7 +198,7 @@ def gen_poem(begin_word):
     rnn_model = rnn.RNN_model(batch_sz=64, vocab_len=len(word_int_map) + 1, word_embedding=word_embedding,
                                    embedding_dim=100, lstm_hidden_dim=128)
 
-    rnn_model.load_state_dict(torch.load('./poem_generator_rnn'))
+    rnn_model.load_state_dict(torch.load('./poem_generator_rnn', weights_only=True))
 
     # 指定开始的字
 
@@ -218,7 +218,7 @@ def gen_poem(begin_word):
 
 
 
-run_training()  # 如果不是训练阶段 ，请注销这一行 。 网络训练时间很长。
+#run_training()  # 如果不是训练阶段 ，请注销这一行 。 网络训练时间很长。
 
 
 pretty_print_poem(gen_poem("日"))
